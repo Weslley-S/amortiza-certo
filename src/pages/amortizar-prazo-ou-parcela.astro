@@ -1,0 +1,123 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CalculatorContainer from '@/components/calculator/CalculatorContainer';
+import AdSlot from '@/components/ads/AdSlot.astro';
+import FaqAccordion from '@/components/common/FaqAccordion.astro';
+import type { FaqItem } from '@/components/seo/JsonLdSchema.astro';
+
+const prazoParcelaFaqs: FaqItem[] = [
+  {
+    question: 'Amortizar no prazo ou na parcela: qual economiza mais dinheiro?',
+    answer:
+      'Amortizar no prazo quase sempre gera uma economia de juros significativamente maior do que amortizar no valor da parcela. Ao manter o ritmo original de amortização mensal e eliminar parcelas do final do contrato, você corta drasticamente o tempo de incidência dos juros sobre o saldo devedor.',
+  },
+  {
+    question: 'Por que algumas pessoas preferem amortizar reduzindo o valor da parcela?',
+    answer:
+      'Reduzir o valor da parcela alivia o orçamento mensal imediato, liberando fluxo de caixa para outras despesas da família ou aumentando a margem de segurança financeira em caso de imprevistos. Porém, como o prazo total continua longo, a economia de juros é menor se você não reinvestir essa diferença.',
+  },
+  {
+    question: 'O que é a estratégia híbrida (Efeito Bola de Neve) na amortização?',
+    answer:
+      'Na estratégia híbrida, você solicita ao banco a redução do valor da parcela sempre que faz um aporte extra, mas continua pagando todos os meses o mesmo valor que pagava antes, aplicando a diferença economizada na prestação como um novo aporte extraordinário. Isso combina flexibilidade em momentos de aperto com velocidade máxima de quitação.',
+  },
+  {
+    question: 'Se eu amortizar no prazo, o valor da minha parcela atual aumenta?',
+    answer:
+      'Não. Ao escolher a redução de prazo, sua prestação mensal obrigatória segue o cronograma normal (inclusive caindo levemente na Tabela SAC, já que o saldo devedor caiu e os juros do mês seguinte serão menores). O que muda é que as últimas prestações do contrato são eliminadas.',
+  },
+  {
+    question: 'Qual o valor mínimo para fazer uma amortização extraordinária no banco?',
+    answer:
+      'A maioria dos bancos permite amortizações extraordinárias a partir de valores equivalentes a uma prestação mensal ou até mesmo quantias menores diretamente pelo aplicativo do financiamento habitacional. Consulte as condições do seu contrato ou simule no app da instituição.',
+  },
+];
+---
+
+<BaseLayout
+  title="Amortizar no Prazo ou na Parcela? Simulador do que Vale Mais a Pena"
+  description="Descubra matematicamente se compensa mais amortizar reduzindo o prazo ou o valor da prestação mensal do seu financiamento imobiliário."
+  canonicalPath="/amortizar-prazo-ou-parcela"
+  faqs={prazoParcelaFaqs}
+>
+  <section class="mb-6">
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+      Amortizar no Prazo ou na Parcela?
+    </h1>
+    <p class="mt-2 text-slate-600 text-base sm:text-lg max-w-3xl">
+      Compare matematicamente as duas opções de amortização extraordinária. Alterne entre{' '}
+      <strong>Reduzir Prazo</strong> e <strong>Reduzir Valor da Parcela</strong> no simulador abaixo e veja a diferença na economia de juros.
+    </p>
+  </section>
+
+  <CalculatorContainer
+    client:load
+    initialPreset={{
+      loanAmount: 300000,
+      annualInterestRate: 9.5,
+      totalMonths: 360,
+      monthlyExtraPayment: 800,
+      reductionStrategy: 'TERM',
+    }}
+  />
+
+  <AdSlot slotId="mid-content-prazo-parcela" format="in-article" />
+
+  <article class="prose prose-slate max-w-none bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm my-8">
+    <h2>A matemática por trás da dúvida: Prazo vs. Parcela</h2>
+    <p>
+      Ao realizar um pagamento extra no financiamento imobiliário (seja com recursos próprios, 13º salário ou{' '}
+      <a href="/amortizar-com-fgts">saldo do FGTS</a>), o banco oferece duas alternativas para recalcular o contrato:
+      <strong>reduzir o prazo</strong> (mantendo o ritmo de amortização e cortando parcelas do fim) ou
+      <strong>reduzir o valor da prestação mensal</strong> (mantendo a data original de término do financiamento).
+    </p>
+    <p>
+      Embora ambas as opções reduzam o saldo devedor imediatamente no mesmo valor do aporte realizado, o impacto nos
+      <strong>juros acumulados nos anos seguintes</strong> é completamente diferente.
+    </p>
+
+    <h3>1. Por que reduzir o prazo gera economia exponencial?</h3>
+    <p>
+      Quando você escolhe abater no <strong>prazo</strong>, o valor regular de amortização que você paga dentro de cada parcela mensal
+      não diminui. Como o seu saldo devedor caiu após o aporte extra, você passa a quitar o restante da dívida em muito menos meses.
+    </p>
+    <p>
+      No simulador acima (<strong>R$ 300.000,00</strong> a <strong>9,50% a.a.</strong> em <strong>360 meses</strong> na Tabela SAC, com aporte mensal de <strong>R$ 800,00</strong>):
+    </p>
+    <ul>
+      <li><strong>Reduzindo o prazo:</strong> o contrato cai para cerca de <strong>170 meses</strong> (menos de 15 anos), gerando uma economia superior a <strong>R$ 225.000,00 em juros</strong>.</li>
+      <li><strong>Reduzindo a parcela:</strong> a prestação obrigatória diminui gradualmente, mas o contrato se estende por mais tempo (cerca de 233 meses), reduzindo a economia total de juros em dezenas de milhares de reais em comparação à escolha pelo prazo.</li>
+    </ul>
+
+    <h3>2. Quando faz sentido reduzir o valor da parcela?</h3>
+    <p>
+      Reduzir a prestação mensal não é "errado" — trata-se de uma escolha de <strong>gestão de fluxo de caixa e segurança</strong>. Ela é indicada quando:
+    </p>
+    <ul>
+      <li>A parcela atual compromete uma fatia apertada da renda mensal da família.</li>
+      <li>Você trabalha como autônomo ou possui renda variável e deseja reduzir seu custo fixo obrigatório em meses de menor faturamento.</li>
+      <li>Você pretende liberar margem de crédito para outro objetivo financeiro importante de curto prazo.</li>
+    </ul>
+
+    <h2>A Estratégia Híbrida (Efeito Bola de Neve)</h2>
+    <p>
+      Existe uma técnica utilizada por planejadores financeiros que combina o melhor dos dois mundos:
+    </p>
+    <ol>
+      <li>Ao fazer um aporte extra (por exemplo, R$ 20.000,00), você escolhe a opção de <strong>reduzir o valor da parcela</strong> no banco.</li>
+      <li>Sua obrigação mensal cai (por exemplo, de R$ 3.100,00 para R$ 2.850,00), garantindo uma folga caso ocorra uma emergência no futuro.</li>
+      <li>Nos meses normais, porém, você continua separando os mesmos <strong>R$ 3.100,00</strong> e aplica os <strong>R$ 250,00</strong> de diferença como um novo aporte extraordinário mensal.</li>
+    </ol>
+    <p>
+      A cada mês, a parcela obrigatória cai mais um pouco e o valor disponível para o aporte extra aumenta — criando um
+      <strong>efeito bola de neve positivo</strong> que acelera a quitação quase na mesma velocidade da redução de prazo, mas com risco mensal reduzido.
+    </p>
+    <p>
+      Para entender como o sistema escolhido no contrato interfere nessa conta, veja também nosso comparativo{' '}
+      <a href="/tabela-sac-vs-price">Tabela SAC vs. Price</a> ou volte para a{' '}
+      <a href="/">Calculadora de Amortização Geral</a>.
+    </p>
+  </article>
+
+  <FaqAccordion items={prazoParcelaFaqs} />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+---
+
+<div
+  id="cookie-consent-banner"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Aviso de cookies e privacidade"
+  class="hidden fixed bottom-4 left-4 right-4 z-50 max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white/95 backdrop-blur p-4 sm:p-5 shadow-xl print:hidden"
+>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+      Seus cálculos financeiros rodam 100% no seu navegador. Utilizamos cookies essenciais e de publicidade (Google AdSense) para manter o serviço gratuito. Ao continuar, você concorda com nossa{' '}
+      <a
+        href="/politica-de-privacidade"
+        class="font-semibold text-emerald-700 hover:text-emerald-800 underline underline-offset-2"
+      >
+        Política de Privacidade
+      </a>
+      .
+    </p>
+    <button
+      id="cookie-consent-accept"
+      type="button"
+      class="shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition-colors"
+    >
+      Entendi e aceitar
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    try {
+      var key = 'cookie_consent_accepted';
+      var banner = document.getElementById('cookie-consent-banner');
+      var acceptBtn = document.getElementById('cookie-consent-accept');
+      if (!banner || !acceptBtn) return;
+
+      if (localStorage.getItem(key) !== 'true') {
+        banner.classList.remove('hidden');
+      }
+
+      acceptBtn.addEventListener('click', function () {
+        localStorage.setItem(key, 'true');
+        banner.classList.add('hidden');
+      });
+    } catch (e) {
+      // Ignora falhas de acesso ao localStorage em modos restritos
+    }
+  })();
+</script>

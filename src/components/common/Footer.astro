@@ -1,0 +1,76 @@
+---
+const currentYear = new Date().getFullYear();
+
+const simulatorLinks = [
+  { href: '/', label: 'Calculadora Geral' },
+  { href: '/tabela-sac-vs-price', label: 'Tabela SAC vs. Price' },
+  { href: '/amortizar-prazo-ou-parcela', label: 'Amortizar Prazo ou Parcela?' },
+  { href: '/amortizar-com-fgts', label: 'Amortizar com FGTS' },
+];
+
+const legalLinks = [
+  { href: '/sobre', label: 'Sobre e Metodologia' },
+  { href: '/contato', label: 'Contato' },
+  { href: '/termos-de-uso', label: 'Termos de Uso' },
+  { href: '/politica-de-privacidade', label: 'Política de Privacidade' },
+];
+---
+
+<footer class="bg-white border-t border-slate-200 mt-12 print:hidden">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-100">
+      <div>
+        <a href="/" class="inline-flex items-center gap-2 text-slate-900 font-bold text-base">
+          <img src="/favicon.svg" alt="" width="24" height="24" class="w-6 h-6 rounded" />
+          <span>Calculadora de Amortização</span>
+        </a>
+        <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+          Ferramenta 100% gratuita e client-side para simular financiamentos imobiliários, comparar sistemas SAC e Price e planejar aportes extras.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+          Simuladores
+        </h2>
+        <ul class="space-y-2 text-sm">
+          {
+            simulatorLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-slate-600 hover:text-emerald-700 transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+          Institucional e Legal
+        </h2>
+        <ul class="space-y-2 text-sm">
+          {
+            legalLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-slate-600 hover:text-emerald-700 transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-6 space-y-2 text-xs text-slate-500">
+      <p>
+        <strong>Aviso Legal:</strong> As simulações deste site têm caráter meramente informativo e educacional, não substituindo o cálculo oficial da sua instituição financeira.
+      </p>
+      <p>
+        © {currentYear} Calculadora de Amortização. Todos os direitos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

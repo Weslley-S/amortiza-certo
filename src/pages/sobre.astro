@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Sobre e Metodologia de Cálculo | Calculadora de Amortização"
+  description="Conheça a missão da Calculadora de Amortização e a metodologia matemática oficial (SAC, Price e aportes extras) utilizada em nossas simulações."
+  canonicalPath="/sobre"
+  ogType="article"
+>
+  <article class="prose prose-slate max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
+    <h1>Sobre a Calculadora de Amortização</h1>
+
+    <p>
+      A <strong>Calculadora de Amortização</strong> nasceu com um objetivo simples: democratizar o acesso à matemática financeira de longo prazo,
+      permitindo que qualquer pessoa compreenda, em segundos e sem planilhas complexas, o verdadeiro custo dos juros de um financiamento imobiliário
+      e o poder transformador das amortizações antecipadas.
+    </p>
+
+    <h2>Nossa Missão e Compromisso com a Privacidade</h2>
+    <p>
+      Acreditamos que ferramentas de educação financeira devem ser <strong>gratuitas, rápidas e livres de fricção</strong>. Por isso:
+    </p>
+    <ul>
+      <li>Não exigimos cadastro, CPF, e-mail ou telefone para liberar resultados;</li>
+      <li>Toda a simulação ocorre <strong>100% no seu navegador</strong>, garantindo privacidade absoluta sobre seus valores;</li>
+      <li>O projeto é sustentado de forma transparente por publicidade digital não intrusiva.</li>
+    </ul>
+
+    <h2>Metodologia Matemática Utilizada</h2>
+    <p>
+      Nosso motor de cálculo segue rigorosamente as equações clássicas da matemática financeira adotadas pelo Sistema Financeiro de Habitação (SFH) e pelo Sistema Financeiro Imobiliário (SFI):
+    </p>
+    <ul>
+      <li>
+        <strong>Conversão de Taxa Efetiva:</strong> A taxa de juros anual informada (<em>i_anual</em>) é convertida para a taxa mensal equivalente através da equivalência composta:
+        <code>i_mensal = (1 + i_anual)^(1/12) - 1</code>.
+      </li>
+      <li>
+        <strong>Sistema de Amortização Constante (SAC):</strong> O principal é dividido igualmente pelo número de meses restante, gerando parcelas decrescentes conforme o saldo devedor cai.
+      </li>
+      <li>
+        <strong>Sistema Francês de Amortização (Tabela Price):</strong> A prestação base é calculada pela fórmula de série uniforme de pagamentos, mantendo o valor constante ao longo do prazo original.
+      </li>
+      <li>
+        <strong>Amortizações Extraordinárias e Recálculo:</strong> Todos os aportes extras (mensais, pontuais ou FGTS bienal) abatem diretamente o saldo devedor.
+        Na opção <em>Reduzir Prazo</em>, o ritmo de amortização/prestação é preservado para antecipar a quitação; na opção <em>Reduzir Parcela</em>, o saldo remanescente é redistribuído pelo prazo restante original.
+      </li>
+    </ul>
+
+    <h2>Transparência</h2>
+    <p>
+      Encontrou alguma oportunidade de melhoria ou deseja sugerir novos simuladores? Entre em contato conosco pela página de{' '}
+      <a href="/contato">Contato</a>.
+    </p>
+  </article>
+</BaseLayout>

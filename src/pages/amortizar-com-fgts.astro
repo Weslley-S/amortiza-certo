@@ -1,0 +1,129 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CalculatorContainer from '@/components/calculator/CalculatorContainer';
+import AdSlot from '@/components/ads/AdSlot.astro';
+import FaqAccordion from '@/components/common/FaqAccordion.astro';
+import type { FaqItem } from '@/components/seo/JsonLdSchema.astro';
+
+const fgtsFaqs: FaqItem[] = [
+  {
+    question: 'Qual o intervalo mínimo para usar o FGTS na amortização do financiamento?',
+    answer:
+      'Para amortizar extraordinariamente ou liquidar o saldo devedor com recursos do FGTS, a regra exige um intervalo mínimo de 2 anos (24 meses) entre uma utilização e outra para o mesmo contrato e titular. Já a modalidade de pagamento de parte das prestações (redução de até 80% do valor de 12 parcelas) pode ser renovada anualmente.',
+  },
+  {
+    question: 'É possível usar o FGTS para amortizar financiamento fora do SFH (SFI)?',
+    answer:
+      'Sim, desde que o contrato e o imóvel atendam aos critérios vigentes estabelecidos pelo Conselho Curador do FGTS e pela Caixa Econômica Federal para uso do fundo na moradia própria (como limite de avaliação do imóvel vigente na data da contratação ou nas regras atuais de enquadramento). Consulte seu banco para confirmar o enquadramento do contrato.',
+  },
+  {
+    question: 'Ao usar o FGTS, devo escolher reduzir o prazo ou o valor da prestação?',
+    answer:
+      'Matematicamente, usar o FGTS para reduzir o prazo do financiamento gera a maior economia possível em juros. Como o saldo do FGTS é um recurso que rende menos do que a maioria das taxas de financiamento imobiliário (TR + 3% a.a. mais distribuição de resultados), abater o prazo potencializa o ganho financeiro da família.',
+  },
+  {
+    question: 'Posso usar o FGTS para amortizar mesmo se o imóvel tiver sido comprado em conjunto?',
+    answer:
+      'Sim. Quando há mais de um comprador no contrato (por exemplo, cônjuges ou companheiros), cada titular pode utilizar o saldo de sua respectiva conta vinculada do FGTS, desde que ambos atendam aos requisitos individuais do programa e respeitem o interstício de 24 meses.',
+  },
+  {
+    question: 'Como solicitar a amortização com FGTS na Caixa ou em outros bancos?',
+    answer:
+      'Na Caixa Econômica Federal, a solicitação pode ser feita diretamente pelo aplicativo Habitação Caixa, na opção "Amortizar" ou "Usar FGTS". Nos bancos privados (Itaú, Bradesco, Santander), o pedido costuma ser iniciado pelo portal de crédito imobiliário do banco ou pela central de atendimento mediante envio do extrato do FGTS.',
+  },
+];
+---
+
+<BaseLayout
+  title="Simulador de Amortização com FGTS: Prazo ou Parcela (Regras Atualizadas)"
+  description="Calcule quanto seu financiamento reduz ao usar o saldo do FGTS a cada 2 anos ou em aporte único. Entenda as regras de interstício e desconto nas parcelas."
+  canonicalPath="/amortizar-com-fgts"
+  faqs={fgtsFaqs}
+>
+  <section class="mb-6">
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+      Simulador de Amortização com FGTS
+    </h1>
+    <p class="mt-2 text-slate-600 text-base sm:text-lg max-w-3xl">
+      Calcule o impacto de usar o saldo do FGTS em um aporte único ou de forma recorrente a cada{' '}
+      <strong>24 meses (2 anos)</strong> para abater seu financiamento imobiliário.
+    </p>
+  </section>
+
+  <CalculatorContainer
+    client:load
+    highlightFgts={true}
+    initialPreset={{
+      loanAmount: 280000,
+      annualInterestRate: 9.0,
+      totalMonths: 360,
+      monthlyExtraPayment: 0,
+      lumpSumPayment: 25000,
+      lumpSumMonth: 12,
+      recurringFgtsAmount: 12000,
+      reductionStrategy: 'TERM',
+    }}
+  />
+
+  <AdSlot slotId="mid-content-fgts" format="in-article" />
+
+  <article class="prose prose-slate max-w-none bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm my-8">
+    <h2>Regras para usar o FGTS na amortização do financiamento</h2>
+    <p>
+      Para trabalhadores sob o regime CLT, o Fundo de Garantia do Tempo de Serviço (FGTS) é uma das ferramentas mais eficientes para
+      quitar o imóvel próprio antes do prazo. Enquanto o saldo parado na conta do FGTS rende <strong>3% ao ano + TR</strong> (acrescido da
+      distribuição anual de lucros), os juros de um financiamento imobiliário costumam variar entre <strong>8% e 11% ao ano</strong>.
+      Trocar uma dívida cara por um recurso de baixo rendimento gera ganho financeiro imediato.
+    </p>
+    <p>
+      Existem duas modalidades principais de uso do FGTS em um contrato ativo:
+    </p>
+    <ul>
+      <li>
+        <strong>1. Amortização extraordinária do saldo devedor (a cada 24 meses):</strong> você transfere o saldo disponível no FGTS diretamente
+        para abater o principal da dívida, podendo optar por <strong>reduzir o prazo</strong> ou <strong>diminuir o valor das prestações</strong>.
+        Após cada uso nessa modalidade, é necessário aguardar o interstício mínimo de <strong>2 anos (24 meses)</strong> para utilizá-lo novamente no mesmo imóvel.
+      </li>
+      <li>
+        <strong>2. Abatimento de até 80% em 12 prestações mensais:</strong> o FGTS é bloqueado e usado mês a mês para pagar até 80% do valor de
+        12 parcelas consecutivas. Essa opção ajuda quem precisa de alívio imediato no orçamento e pode ser renovada anualmente, mas não reduz o
+        saldo devedor tão rapidamente quanto a amortização direta no prazo.
+      </li>
+    </ul>
+
+    <h2>Pré-requisitos básicos exigidos pelo programa</h2>
+    <p>
+      Antes de solicitar o uso do fundo no simulador ou no banco, verifique se você cumpre as condições padrão:
+    </p>
+    <ol>
+      <li>Possuir no mínimo 3 anos de trabalho sob o regime do FGTS (somando períodos consecutivos ou não).</li>
+      <li>Não possuir outro financiamento ativo no Sistema Financeiro de Habitação (SFH) em qualquer parte do território nacional.</li>
+      <li>O imóvel financiado deve ser destinado à moradia própria do trabalhador e estar com as prestações em dia (ou dentro das regras de regularização com o próprio FGTS, caso aplicável).</li>
+      <li>Respeitar o intervalo mínimo de 24 meses desde a última amortização/liquidação feita com o FGTS pelo mesmo titular naquele contrato.</li>
+    </ol>
+
+    <h2>Exemplo prático simulado com FGTS bienal</h2>
+    <p>
+      No cenário pré-carregado acima (<strong>R$ 280.000,00</strong> em <strong>360 meses</strong> a <strong>9,00% a.a.</strong>):
+    </p>
+    <p>
+      Ao aplicar <strong>R$ 25.000,00</strong> de saldo acumulado no mês 12 e continuar utilizando <strong>R$ 12.000,00</strong> de FGTS a cada 24 meses
+      para reduzir o prazo, você não tira 1 centavo extra do seu salário líquido mensal, mas reduz a duração do financiamento em{' '}
+      <strong>mais de uma década</strong> e economiza mais de <strong>R$ 160.000,00 em juros</strong>.
+    </p>
+
+    <h2>Passo a passo para solicitar no aplicativo do banco</h2>
+    <ol>
+      <li><strong>Consulte seu saldo:</strong> abra o aplicativo oficial do <em>FGTS</em> da Caixa para conferir o valor disponível nas contas vinculadas ativas e inativas.</li>
+      <li><strong>Simule antes de pedir:</strong> ajuste os valores no simulador acima para comparar a economia entre <a href="/amortizar-prazo-ou-parcela">reduzir prazo ou parcela</a>.</li>
+      <li><strong>Faça o pedido digital:</strong> no app <em>Habitação Caixa</em> (ou portal de crédito imobiliário do seu banco), acesse a aba de amortização com FGTS, informe o valor desejado e escolha a opção de redução de prazo.</li>
+      <li><strong>Acompanhe a compensação:</strong> após a validação eletrônica, o valor é transferido diretamente para abater o saldo devedor no próximo vencimento ou em poucos dias úteis.</li>
+    </ol>
+    <p>
+      Quer comparar também como o contrato evolui na <a href="/tabela-sac-vs-price">Tabela SAC vs. Price</a> ou adicionar aportes mensais do seu bolso?
+      Acesse a <a href="/">Calculadora de Amortização Geral</a>.
+    </p>
+  </article>
+
+  <FaqAccordion items={fgtsFaqs} />
+</BaseLayout>

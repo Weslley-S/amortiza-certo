@@ -1,0 +1,28 @@
+---
+interface Props {
+  slotId: string;
+  format: 'horizontal' | 'rectangle' | 'in-article';
+  label?: string;
+}
+
+const { slotId, format, label = 'Publicidade' } = Astro.props;
+
+const formatClasses: Record<Props['format'], string> = {
+  horizontal: 'min-h-[100px] sm:min-h-[90px] w-full max-w-[728px]',
+  rectangle: 'min-h-[250px] w-full max-w-[336px]',
+  'in-article': 'min-h-[250px] w-full max-w-[728px]',
+};
+
+const sizeClass = formatClasses[format];
+---
+
+<aside aria-label="Publicidade" class="my-6 flex flex-col items-center justify-center print:hidden">
+  <span class="text-[11px] uppercase tracking-wider text-slate-400 mb-1">{label}</span>
+  <div
+    data-ad-slot={slotId}
+    class={`border border-dashed border-slate-200 bg-slate-50/60 rounded-lg flex items-center justify-center text-xs text-slate-400 ${sizeClass}`}
+  >
+    <!-- Espaço reservado para Google AdSense (prevenção de CLS) -->
+    <span>Espaço reservado ({format})</span>
+  </div>
+</aside>

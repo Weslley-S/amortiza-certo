@@ -1,0 +1,57 @@
+---
+import SeoMeta from '@/components/seo/SeoMeta.astro';
+import JsonLdSchema, { type FaqItem } from '@/components/seo/JsonLdSchema.astro';
+import Header from '@/components/common/Header.astro';
+import Footer from '@/components/common/Footer.astro';
+import CookieConsent from '@/components/common/CookieConsent.astro';
+import AdSlot from '@/components/ads/AdSlot.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogType?: 'website' | 'article';
+  faqs?: FaqItem[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType = 'website',
+  faqs = [],
+} = Astro.props;
+
+const siteBase = Astro.site ?? new URL('https://amortizacerto.com.br');
+const canonicalUrl = new URL(canonicalPath, siteBase).href;
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SeoMeta
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogType={ogType}
+    />
+    <JsonLdSchema
+      appName={title}
+      appDescription={description}
+      canonicalUrl={canonicalUrl}
+      faqs={faqs}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans antialiased">
+    <Header />
+    <AdSlot slotId="top-leaderboard" format="horizontal" />
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6">
+      <slot />
+    </main>
+    <Footer />
+    <CookieConsent />
+  </body>
+</html>

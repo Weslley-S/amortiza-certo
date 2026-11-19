@@ -1,0 +1,45 @@
+---
+import type { FaqItem } from '@/components/seo/JsonLdSchema.astro';
+
+interface Props {
+  items: FaqItem[];
+  title?: string;
+}
+
+const { items, title = 'Perguntas Frequentes (FAQ)' } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section aria-label={title} class="my-8 space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+        {title}
+      </h2>
+
+      <div class="space-y-3">
+        {items.map((item) => (
+          <details class="group bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-sm">
+            <summary class="font-semibold text-slate-900 cursor-pointer list-none flex items-center justify-between gap-4 select-none">
+              <span>{item.question}</span>
+              <svg
+                class="w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </summary>
+            <p class="mt-3 pt-3 border-t border-slate-100 text-sm sm:text-base text-slate-600 leading-relaxed">
+              {item.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}

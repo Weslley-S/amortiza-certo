@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contato | Calculadora de Amortização"
+  description="Entre em contato com a equipe da Calculadora de Amortização para tirar dúvidas, relatar erros de cálculo ou enviar sugestões de melhorias."
+  canonicalPath="/contato"
+  ogType="article"
+>
+  <article class="prose prose-slate max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
+    <h1>Contato</h1>
+
+    <p>
+      Valorizamos muito o retorno de quem utiliza a <strong>Calculadora de Amortização</strong> no dia a dia.
+      Se você identificou qualquer inconsistência, deseja sugerir uma nova funcionalidade ou tratar de parcerias institucionais,
+      utilize o nosso canal oficial de atendimento:
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-emerald-200 bg-emerald-50/70 p-6">
+      <p class="text-xs font-semibold uppercase tracking-wider text-emerald-800">
+        E-mail Institucional
+      </p>
+      <p class="mt-2 text-lg sm:text-xl font-bold text-slate-900">
+        <a
+          href="mailto:contato@amortizacerto.com.br"
+          class="text-emerald-700 hover:text-emerald-800 underline underline-offset-4"
+        >
+          contato@amortizacerto.com.br
+        </a>
+      </p>
+      <p class="mt-2 text-sm text-slate-600">
+        Tempo médio de resposta: até 2 dias úteis.
+      </p>
+    </div>
+
+    <h2>Orientações antes de enviar sua mensagem</h2>
+    <ul>
+      <li>
+        <strong>Relato de divergências ou bugs:</strong> sempre que possível, utilize o botão <em>"Copiar Link desta Simulação"</em> na calculadora e envie a URL completa junto com a descrição do cenário esperado.
+      </li>
+      <li>
+        <strong>Atendimento bancário:</strong> não possuímos vínculo com a Caixa Econômica Federal ou bancos privados, portanto não temos acesso a contratos individuais, boletos ou saldos de FGTS.
+      </li>
+      <li>
+        <strong>Consultoria financeira:</strong> conforme nossos <a href="/termos-de-uso">Termos de Uso</a>, não prestamos aconselhamento financeiro personalizado ou individualizado por e-mail.
+      </li>
+    </ul>
+  </article>
+</BaseLayout>

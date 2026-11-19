@@ -1,0 +1,153 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CalculatorContainer from '@/components/calculator/CalculatorContainer';
+import AdSlot from '@/components/ads/AdSlot.astro';
+import FaqAccordion from '@/components/common/FaqAccordion.astro';
+import type { FaqItem } from '@/components/seo/JsonLdSchema.astro';
+
+const sacPriceFaqs: FaqItem[] = [
+  {
+    question: 'Qual tabela faz pagar menos juros no total: SAC ou Price?',
+    answer:
+      'A Tabela SAC quase sempre resulta em um pagamento total de juros menor do que a Tabela Price para o mesmo valor, taxa e prazo. Isso acontece porque na SAC o saldo devedor é amortizado mais rapidamente desde a primeira parcela, reduzindo a base sobre a qual os juros mensais incidem.',
+  },
+  {
+    question: 'Por que a primeira parcela da Tabela Price é menor que a da SAC?',
+    answer:
+      'Na Tabela Price, a parcela é calculada para permanecer constante durante todo o contrato, exigindo um pagamento menor nos primeiros meses (composto majoritariamente por juros e pouca amortização). Na SAC, você já começa pagando a cota integral de amortização mais os juros sobre o saldo total, elevando a primeira prestação.',
+  },
+  {
+    question: 'Qual tabela exige menor renda familiar para aprovar o financiamento?',
+    answer:
+      'Como os bancos limitam o comprometimento da renda mensal a cerca de 30% do valor da primeira parcela, a Tabela Price costuma exigir uma renda familiar menor para aprovar o mesmo valor financiado, justamente porque sua prestação inicial é mais baixa do que a da Tabela SAC.',
+  },
+  {
+    question: 'É possível mudar da Tabela Price para a Tabela SAC depois de assinar o contrato?',
+    answer:
+      'Na maioria dos contratos padrão, a troca direta de sistema no mesmo banco não é automática, mas você pode realizar uma portabilidade de crédito imobiliário para outra instituição financeira solicitando o novo enquadramento na Tabela SAC, ou simplesmente fazer amortizações extras frequentes na Price para neutralizar a diferença de juros.',
+  },
+  {
+    question: 'Se eu amortizar todos os meses na Tabela Price, ela empata com a SAC?',
+    answer:
+      'Sim. Se você escolher a Tabela Price pela parcela inicial menor (ou maior facilidade de aprovação) e aplicar mensalmente como amortização extraordinária a diferença entre a parcela da SAC e a da Price, a velocidade de redução do saldo devedor e o custo final de juros serão praticamente equivalentes.',
+  },
+];
+---
+
+<BaseLayout
+  title="Tabela SAC vs Price: Simulador Comparativo de Financiamento Imobiliário"
+  description="Compare lado a lado a Tabela SAC e a Tabela Price. Veja a diferença no valor da primeira parcela, última prestação e total de juros pagos no financiamento."
+  canonicalPath="/tabela-sac-vs-price"
+  faqs={sacPriceFaqs}
+>
+  <section class="mb-6">
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+      Tabela SAC vs. Price: Qual Escolher?
+    </h1>
+    <p class="mt-2 text-slate-600 text-base sm:text-lg max-w-3xl">
+      Simule seu financiamento e compare instantaneamente a diferença na primeira prestação,
+      na evolução do saldo devedor e no total de juros pagos entre o sistema SAC e o sistema Price.
+    </p>
+  </section>
+
+  <CalculatorContainer
+    client:load
+    initialPreset={{
+      loanAmount: 350000,
+      annualInterestRate: 9.8,
+      totalMonths: 360,
+      monthlyExtraPayment: 0,
+      system: 'SAC',
+    }}
+  />
+
+  <AdSlot slotId="mid-content-sac-price" format="in-article" />
+
+  <article class="prose prose-slate max-w-none bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm my-8">
+    <h2>Tabela Comparativa Direta: SAC vs. Price</h2>
+    <p>
+      No Brasil, praticamente todos os financiamentos imobiliários ofertados por bancos públicos e privados utilizam um de dois sistemas:
+      o <strong>Sistema de Amortização Constante (SAC)</strong> ou o <strong>Sistema Francês de Amortização (Tabela Price)</strong>.
+      Abaixo estão as principais diferenças estruturais entre eles:
+    </p>
+
+    <div class="overflow-x-auto not-prose my-6 rounded-xl border border-slate-200">
+      <table class="min-w-full divide-y divide-slate-200 text-sm text-left">
+        <thead class="bg-slate-50 text-slate-700 font-semibold">
+          <tr>
+            <th scope="col" class="px-4 py-3">Critério</th>
+            <th scope="col" class="px-4 py-3">Tabela SAC</th>
+            <th scope="col" class="px-4 py-3">Tabela Price</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-slate-700">
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-900">Valor das prestações</td>
+            <td class="px-4 py-3">Decrescente (começa mais alta e cai todo mês)</td>
+            <td class="px-4 py-3">Fixa do início ao fim (desconsiderando TR/IPCA)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-900">Primeira parcela</td>
+            <td class="px-4 py-3">Mais alta (exige maior renda para aprovação)</td>
+            <td class="px-4 py-3">Mais baixa (facilita aprovação de crédito)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-900">Amortização da dívida</td>
+            <td class="px-4 py-3">Constante e acelerada desde o mês 1</td>
+            <td class="px-4 py-3">Lenta no início e crescente apenas no final</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-900">Total de juros pagos</td>
+            <td class="px-4 py-3 text-emerald-700 font-semibold">Menor custo total</td>
+            <td class="px-4 py-3">Maior custo total de juros</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-900">Indicação principal</td>
+            <td class="px-4 py-3">Quem quer economizar juros e pode pagar mais no início</td>
+            <td class="px-4 py-3">Quem precisa de parcela inicial menor ou fluxo previsível</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Como a escolha impacta um financiamento de R$ 350.000?</h2>
+    <p>
+      Utilizando o cenário pré-carregado no simulador acima (<strong>R$ 350.000,00</strong> em <strong>360 meses</strong> a <strong>9,80% a.a.</strong>):
+    </p>
+    <ul>
+      <li>
+        <strong>Na Tabela SAC:</strong> a primeira parcela gira em torno de <strong>R$ 3.704,00</strong>, caindo progressivamente até chegar a aproximadamente <strong>R$ 980,00</strong> na última prestação. O total de juros pagos ao longo dos 30 anos fica próximo de <strong>R$ 491.000,00</strong>.
+      </li>
+      <li>
+        <strong>Na Tabela Price:</strong> todas as 360 parcelas base têm o mesmo valor fixo aproximado de <strong>R$ 2.948,00</strong> (cerca de R$ 756 a menos logo no primeiro mês). Em contrapartida, o total de juros pagos sobe para cerca de <strong>R$ 711.000,00</strong> — uma diferença superior a <strong>R$ 220.000,00</strong> em juros ao fim do prazo.
+      </li>
+    </ul>
+
+    <h2>Quando escolher a Tabela SAC?</h2>
+    <p>
+      A Tabela SAC é a escolha recomendada para a maioria dos compradores de imóveis residenciais no Brasil, especialmente quando:
+    </p>
+    <ul>
+      <li>Sua renda familiar comporta confortavelmente a primeira parcela dentro do limite de 30% exigido pelo banco.</li>
+      <li>Você pretende permanecer com o financiamento por muitos anos e deseja reduzir o custo efetivo total da operação.</li>
+      <li>Você prefere que o peso da prestação diminua ano após ano em relação ao seu salário ou faturamento.</li>
+    </ul>
+
+    <h2>Quando escolher a Tabela Price?</h2>
+    <p>
+      Embora custe mais caro se levada até o final sem aportes extras, a Tabela Price cumpre um papel estratégico importante em cenários específicos:
+    </p>
+    <ul>
+      <li><strong>Aprovação de crédito:</strong> quando a renda comprovada não atinge o mínimo exigido pela SAC para o valor do imóvel desejado.</li>
+      <li><strong>Previsibilidade de caixa:</strong> comum para investidores que comparam o valor fixo da parcela com o valor líquido do aluguel recebido pelo imóvel.</li>
+      <li><strong>Estratégia com aportes extras:</strong> quando o comprador escolhe a Price para ter obrigação mensal menor em meses apertados, mas usa bônus, 13º salário ou <a href="/amortizar-com-fgts">saldo do FGTS</a> para fazer amortizações extraordinárias frequentes.</li>
+    </ul>
+    <p>
+      Se você já possui um contrato ativo (seja SAC ou Price) e quer saber como cortar esse custo de juros pela metade, confira nosso simulador de{' '}
+      <a href="/amortizar-prazo-ou-parcela">Amortizar no Prazo ou na Parcela</a> ou volte para a{' '}
+      <a href="/">Calculadora de Amortização Geral</a>.
+    </p>
+  </article>
+
+  <FaqAccordion items={sacPriceFaqs} />
+</BaseLayout>

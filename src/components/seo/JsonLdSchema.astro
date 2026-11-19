@@ -1,0 +1,51 @@
+---
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  appName: string;
+  appDescription: string;
+  canonicalUrl: string;
+  faqs?: FaqItem[];
+}
+
+const { appName, appDescription, canonicalUrl, faqs = [] } = Astro.props;
+
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: appName,
+  description: appDescription,
+  url: canonicalUrl,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'All',
+  browserRequirements: 'Requires JavaScript',
+  inLanguage: 'pt-BR',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'BRL',
+  },
+};
+
+const faqSchema =
+  faqs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}

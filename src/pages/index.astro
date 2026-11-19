@@ -1,0 +1,162 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CalculatorContainer from '@/components/calculator/CalculatorContainer';
+import AdSlot from '@/components/ads/AdSlot.astro';
+import FaqAccordion from '@/components/common/FaqAccordion.astro';
+import type { FaqItem } from '@/components/seo/JsonLdSchema.astro';
+
+const homeFaqs: FaqItem[] = [
+  {
+    question: 'O que é amortização extraordinária no financiamento imobiliário?',
+    answer:
+      'A amortização extraordinária ocorre quando você paga um valor adicional além da prestação mensal obrigatória para abater diretamente o saldo devedor do contrato. Como os juros futuros incidem apenas sobre o saldo devedor restante, esse pagamento extra elimina os juros que seriam cobrados sobre aquela quantia até o fim do financiamento.',
+  },
+  {
+    question: 'O que vale mais a pena: amortizar no prazo ou no valor da parcela?',
+    answer:
+      'Do ponto de vista estritamente matemático, amortizar reduzindo o prazo gera uma economia de juros muito maior, pois encurta o período total de incidência de juros compostos. Já a redução do valor da parcela é indicada para quem precisa aliviar o orçamento mensal imediatamente sem comprometer a liquidez.',
+  },
+  {
+    question: 'Qual a diferença prática entre Tabela SAC e Tabela Price?',
+    answer:
+      'Na Tabela SAC (Sistema de Amortização Constante), você amortiza o mesmo valor de principal todos os meses, fazendo com que os juros e as parcelas diminuam gradualmente ao longo do tempo. Na Tabela Price (Sistema Francês), a prestação mensal é fixa do início ao fim, mas a parcela começa composta majoritariamente por juros, resultando em um custo total de juros maior.',
+  },
+  {
+    question: 'Posso usar o FGTS para amortizar meu financiamento a qualquer momento?',
+    answer:
+      'Para abater diretamente o saldo devedor (reduzindo prazo ou parcela) usando o saldo do FGTS, a regra geral exige um intervalo mínimo de 2 anos (24 meses) entre cada utilização para o mesmo contrato. Já para diminuir até 80% do valor de 12 prestações mensais consecutivas, o uso pode ser renovado anualmente, respeitando os critérios do SFH.',
+  },
+  {
+    question: 'Vale mais a pena amortizar o financiamento ou investir o dinheiro?',
+    answer:
+      'A comparação deve ser feita entre o Custo Efetivo Total (CET) do seu financiamento e o rendimento líquido (já descontado o Imposto de Renda) de investimentos conservadores. Se o seu financiamento custa 9,5% ao ano mais TR e um investimento livre de risco rende 8% ao ano líquido, amortizar a dívida oferece um retorno garantido superior, além de reduzir o risco financeiro da família.',
+  },
+  {
+    question: 'Os bancos cobram multa por amortização antecipada no Brasil?',
+    answer:
+      'Não. Para financiamentos imobiliários contratados por pessoas físicas no Brasil, a legislação e as normas do Banco Central garantem o direito à liquidação ou amortização antecipada sem cobrança de multa rescisória, com redução proporcional dos juros futuros.',
+  },
+];
+---
+
+<BaseLayout
+  title="Calculadora de Amortização: Simulador SAC, Price e Aportes Extras (2026)"
+  description="Simule gratuitamente a amortização do seu financiamento imobiliário. Descubra quantos anos e milhares de reais em juros você economiza com aportes extras ou FGTS."
+  canonicalPath="/"
+  faqs={homeFaqs}
+>
+  <section class="mb-6">
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+      Calculadora de Amortização Imobiliária
+    </h1>
+    <p class="mt-2 text-slate-600 text-base sm:text-lg max-w-3xl">
+      Simule gratuitamente seu financiamento na <strong>Tabela SAC</strong> ou <strong>Tabela Price</strong>,
+      compare estratégias de redução de prazo ou parcela e descubra quanto economizar com aportes extras e FGTS.
+    </p>
+  </section>
+
+  <CalculatorContainer client:load />
+
+  <AdSlot slotId="mid-content-home" format="in-article" />
+
+  <article class="prose prose-slate max-w-none bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm my-8">
+    <h2>Como funciona a amortização de um financiamento imobiliário?</h2>
+    <p>
+      Quando você contrata um financiamento imobiliário de longo prazo — geralmente entre 20 e 35 anos (240 a 420 meses) —,
+      cada prestação mensal paga ao banco é dividida em duas partes principais: <strong>amortização</strong> e <strong>juros</strong>
+      (além de eventuais seguros obrigatórios como MIP e DFI e taxas administrativas).
+    </p>
+    <p>
+      A <strong>amortização</strong> é a fração do pagamento que efetivamente reduz o valor principal da sua dívida (o saldo devedor).
+      Já os <strong>juros</strong> representam o custo do dinheiro emprestado e são calculados todos os meses como um percentual
+      sobre o saldo devedor remanescente. Por isso, quanto mais rápido você reduz o saldo devedor por meio de
+      <strong>amortizações extraordinárias</strong>, menor se torna a base de cálculo dos juros em todas as parcelas futuras.
+    </p>
+    <p>
+      Diferentemente de pagar apenas a parcela regular, todo real aplicado em uma amortização extra vai <strong>100% para abater o saldo devedor</strong>,
+      sem incidência de juros adicionais sobre esse aporte. Esse mecanismo cria um efeito inverso ao dos juros compostos:
+      uma pequena quantia antecipada hoje elimina anos de cobrança de juros no futuro.
+    </p>
+
+    <h2>Exemplo prático: o impacto real de um aporte extra de R$ 500 por mês</h2>
+    <p>
+      Para visualizar o poder da amortização antecipada, considere um cenário muito comum no mercado imobiliário brasileiro:
+    </p>
+    <ul>
+      <li><strong>Valor financiado:</strong> R$ 300.000,00</li>
+      <li><strong>Prazo contratado:</strong> 360 meses (30 anos)</li>
+      <li><strong>Taxa efetiva anual:</strong> 9,50% ao ano (equivalente a aproximadamente 0,759% ao mês)</li>
+      <li><strong>Sistema escolhido:</strong> Tabela SAC</li>
+    </ul>
+    <p>
+      Se o comprador pagar apenas as prestações obrigatórias durante os 30 anos, a 1ª parcela será de cerca de <strong>R$ 3.111,00</strong>
+      e ele terá desembolsado mais de <strong>R$ 411.000,00 somente em juros</strong> ao final do contrato — pagando mais pelo custo do crédito do que pelo próprio imóvel.
+    </p>
+    <p>
+      Agora imagine que esse mesmo comprador consiga realizar um <strong>aporte extra mensal fixo de R$ 500,00</strong> optando pela
+      estratégia de <strong>reduzir o prazo</strong>. O resultado matemático impressiona: o financiamento é quitado em cerca de
+      <strong>206 meses (pouco mais de 17 anos)</strong> em vez de 360 meses, gerando uma economia próxima de
+      <strong>R$ 175.000,00 em juros</strong> e eliminando quase 13 anos de dívida.
+    </p>
+    <p>
+      Quer testar se no seu caso compensa mais reduzir o tempo ou aliviar a prestação? Acesse nosso simulador dedicado em{' '}
+      <a href="/amortizar-prazo-ou-parcela">Amortizar no Prazo ou na Parcela</a>.
+    </p>
+
+    <h2>Fórmulas matemáticas: Tabela SAC vs. Tabela Price</h2>
+    <p>
+      Nossa calculadora executa exatamente as equações financeiras utilizadas pelas principais instituições de crédito do país
+      (como Caixa Econômica Federal, Itaú, Bradesco e Santander), convertendo a taxa efetiva anual para a taxa mensal equivalente:
+    </p>
+    <pre><code>i_mensal = (1 + i_anual)^(1/12) - 1</code></pre>
+
+    <h3>1. Sistema de Amortização Constante (Tabela SAC)</h3>
+    <p>
+      Na Tabela SAC, a cota de amortização regular é idêntica do primeiro ao último mês (salvo quando há recálculo por redução de parcela):
+    </p>
+    <ul>
+      <li><strong>Amortização mensal (A):</strong> <code>Saldo Devedor ÷ Prazo Restante</code></li>
+      <li><strong>Juros do mês (J):</strong> <code>Saldo Devedor Anterior × i_mensal</code></li>
+      <li><strong>Prestação do mês (P):</strong> <code>A + J</code></li>
+    </ul>
+    <p>
+      Como a amortização é constante e o saldo cai mês a mês, os juros diminuem continuamente e a prestação fica mais leve com o passar dos anos.
+    </p>
+
+    <h3>2. Sistema Francês de Amortização (Tabela Price)</h3>
+    <p>
+      Na Tabela Price, a prestação mensal base é fixa ao longo de todo o financiamento. No início do contrato, a maior parte da parcela
+      paga juros e apenas uma pequena fração amortiza o principal; conforme o tempo passa, essa proporção se inverte:
+    </p>
+    <ul>
+      <li><strong>Prestação fixa (P):</strong> <code>Saldo Devedor × [ i_mensal × (1 + i_mensal)^N ] ÷ [ (1 + i_mensal)^N - 1 ]</code></li>
+      <li><strong>Juros do mês (J):</strong> <code>Saldo Devedor Anterior × i_mensal</code></li>
+      <li><strong>Amortização do mês (A):</strong> <code>P - J</code></li>
+    </ul>
+    <p>
+      Para analisar detalhadamente qual modelo se adapta melhor ao seu orçamento e capacidade de aprovação de crédito, confira o guia comparativo em{' '}
+      <a href="/tabela-sac-vs-price">Tabela SAC vs. Price: Simulador e Diferenças</a>.
+    </p>
+
+    <h2>Como usar o FGTS para acelerar a quitação</h2>
+    <p>
+      Trabalhadores com carteira assinada que possuem saldo no Fundo de Garantia do Tempo de Serviço (FGTS) e contrataram o imóvel
+      dentro das regras do Sistema Financeiro de Habitação (SFH) contam com um aliado poderoso. É possível utilizar o saldo acumulado
+      a cada <strong>24 meses</strong> para abater diretamente o saldo devedor, sem precisar tirar dinheiro do orçamento mensal.
+    </p>
+    <p>
+      Você pode simular exatamente esse cenário na página{' '}
+      <a href="/amortizar-com-fgts">Simulador de Amortização com FGTS</a>, definindo tanto um aporte pontual quanto saques recorrentes a cada 2 anos.
+    </p>
+
+    <h2>Boas práticas ao planejar suas amortizações</h2>
+    <ol>
+      <li><strong>Mantenha uma reserva de emergência primeiro:</strong> o dinheiro usado para amortizar o imóvel perde liquidez imediata. Garanta de 6 a 12 meses de despesas essenciais em aplicações seguras antes de acelerar os aportes.</li>
+      <li><strong>Compare o CET, não apenas a taxa nominal:</strong> considere seguros e taxas administrativas ao avaliar se o financiamento está mais caro que seus investimentos líquidos.</li>
+      <li><strong>Peça a redução do prazo sempre que possível:</strong> caso sua parcela atual caiba com folga no orçamento, escolher o abatimento no prazo maximiza o corte nos juros compostos.</li>
+      <li><strong>Reinvestimento das parcelas economizadas:</strong> se optar por reduzir o valor da prestação para ganhar margem de segurança, continue aplicando a diferença economizada em novos aportes mensais para manter a velocidade de quitação.</li>
+    </ol>
+  </article>
+
+  <FaqAccordion items={homeFaqs} />
+</BaseLayout>
